@@ -62,8 +62,9 @@ class ListViewTest(TestCase):
         self.assertContains(response, 'itemey 2')  
 
     def view_list(request):
-        items = Item.objects.all()
-        return render(request, 'home.html', {'items': items})
+        list_ = List.objects.create()
+        Item.objects.create(text=request.POST['item_text'], list=list_)
+        return redirect('/lists/the-only-list-in-the-world/')
 
 class NewListTest(TestCase):
 
@@ -78,6 +79,11 @@ class NewListTest(TestCase):
         
         self.assertRedirects(response, '/lists/the-only-list-in-the-world/')
 
+class ListViewTest(TestCase):    
+    def test_displays_all_items(self):        
+        list_ = List.objects.create()        
+        Item.objects.create(text='itemey 1', list=list_)        
+        Item.objects.create(text='itemey 2', list=list_)
         
         #request = HttpRequest()
         #response = home_page(request)
