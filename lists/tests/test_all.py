@@ -1,12 +1,17 @@
 from django.urls import resolve
 from django.test import TestCase
 from django.http import HttpRequest
+from unittest import skip
 
 from lists.models import Item
 from lists.views import home_page
+#from .base import FunctionalTest
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 class HomePageTest(TestCase):
 
+    # @skip
     def test_saving_and_retrieving_items(self):
         first_item = Item()
         first_item.text = 'The first (ever) list item'
@@ -127,5 +132,6 @@ class NewItemTest(TestCase):
     #def test_bad_maths(self):
         #self.assertEqual(1 + 1, 3)
     
+# class FunctionalTest(StaticLiveServerTestCase):    def setUp(self):        [...]    def tearDown(self):        [...]    def wait_for_row_in_list_table(self, row_text):        [...]class NewVisitorTest(FunctionalTest):    def test_can_start_a_list_for_one_user(self):        [...]    def test_multiple_users_can_start_lists_at_different_urls(self):        [...]class LayoutAndStylingTest(FunctionalTest):    def test_layout_and_styling(self):        [...]class ItemValidationTest(FunctionalTest):    @skip    def test_cannot_add_empty_list_items(self):        [...]    
 
     
